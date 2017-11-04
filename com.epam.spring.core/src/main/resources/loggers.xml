@@ -6,18 +6,14 @@
  		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
 	<bean id="consoleEventLogger" class="com.epam.spring.core.logger.ConsoleEventLogger" />
-	<bean id="fileEventLogger" class="com.epam.spring.core.logger.FileEventLogger"
-		init-method="init">
-		<property name="fileName" value="log.txt" />
-	</bean>
-	<bean id="cacheFileEventLogger"
-		class="com.epam.spring.core.logger.CacheFileEventLogger"
-		destroy-method="destroy" parent="fileEventLogger" />
+	
+	<bean id="cacheFileEventLogger" class="com.epam.spring.core.logger.CacheFileEventLogger"
+		parent="fileEventLogger" />
 	<bean id="combinedEventLogger" class="com.epam.spring.core.logger.CombinedEventLogger">
 		<property name="loggers">
 			<list>
-				<ref bean="consoleEventLogger"/>
-				<ref bean="fileEventLogger"/>
+				<ref bean="consoleEventLogger" />
+				<ref bean="fileEventLogger" />
 			</list>
 		</property>
 	</bean>
